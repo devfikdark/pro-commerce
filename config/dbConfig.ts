@@ -1,8 +1,8 @@
 import './importEnv';
-import mongoose from 'mongoose';
+import * as mongoose from 'mongoose';
 
 // cloud connection-Str
-let cloudDB = process.env.DATABASE.replace(
+let cloudDB: string = process.env.DATABASE.replace(
   '<password>',
   process.env.DATABASE_PASSWORD
 );

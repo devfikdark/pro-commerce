@@ -1,5 +1,5 @@
-import './config/importEnv';
-import './config/dbConfig'
+import './../config/importEnv';
+import './../config/dbConfig';
 
 import app from './app';
 
