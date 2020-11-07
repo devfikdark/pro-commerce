@@ -4,6 +4,7 @@ import catchAsync from "../util/catchAsync";
 import User from "../models/userModel";
 
 export class appController {
+  /**  Authentication  **/
   // Create user
   public signUp = async (req: Request, res: Response) => {
     res.setHeader("Content-type", "application/json");
@@ -21,6 +22,19 @@ export class appController {
       let createUser = await User.create(reqObj);
       createUser.password = undefined;
       this.sendCreateToken(createUser, res);
+    } catch (err) {
+      res.json({ err });
+    }
+  }
+
+
+  /**  Data session  **/
+  // get all users
+  public getUsers = async (req: Request, res: Response) => {
+    res.setHeader("Content-type", "application/json");
+    try {
+      const users = await User.find();
+      this.sendData(res, users);
     } catch (err) {
       res.json({ err });
     }
@@ -51,6 +65,13 @@ export class appController {
     res.json({
       status: "failed",
       message: message,
+    });
+  };
+
+  public sendData = (res, data) => {
+    res.json({
+      status: "ok",
+      data
     });
   };
 }
